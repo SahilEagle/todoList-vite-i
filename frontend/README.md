@@ -61,3 +61,4 @@ Follow these instructions to get a copy of the project up and running on your lo
    ![Screenshot 2024-06-13 134438](https://github.com/SahilEagle/todoList-vite-i/assets/108706620/dfff5594-cdb4-4daf-bf60-e2cece55f888)
    ![Screenshot 2024-06-13 134535](https://github.com/SahilEagle/todoList-vite-i/assets/108706620/0aae023d-8a07-4eb8-ab7b-ccf1fdefefe4)
    
+![Screenshot 2024-06-13 134854](https://github.com/SahilEagle/todoList-vite-i/assets/108706620/e20e2a45-71bd-4ddc-bcfc-76ad404db068)
