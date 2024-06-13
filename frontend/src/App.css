@@ -1,0 +1,6 @@
+body {
+    background-color: #E4E9FD;
+    background-image: -webkit-linear-gradient(315deg, #5b21c0 50%, #657dfc 50%);
+    min-height: 1000px;
+    font-family: 'helvetica neue';
+}

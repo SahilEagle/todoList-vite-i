@@ -1,12 +1,12 @@
-import './App.css'
+import "./App.css";
+import Todo from "./pages/Todo";
 
 function App() {
-
   return (
     <>
-    Hello
+      <Todo />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
