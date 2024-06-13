@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-hot-toast";
-import "./Auth.css"; // Make sure to import your CSS file for custom styles
+import "./Auth.css";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -32,7 +32,6 @@ const Auth = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Perform login authentication logic here (replace with your own authentication logic)
     const storedUser = localStorage.getItem("user");
     if (!storedUser) {
       toast.error("No user found. Please sign up first.");
@@ -44,11 +43,9 @@ const Auth = () => {
         parsedUser.email === loginEmail &&
         parsedUser.password === loginPassword
       ) {
-        // Successful login
         toast.success("Login Successful");
         navigate("/todo");
       } else {
-        // Invalid credentials
         toast.error("Invalid email or password. Please try again.");
       }
     } catch (error) {
@@ -59,7 +56,6 @@ const Auth = () => {
   const handleSignup = (e) => {
     e.preventDefault();
 
-    // Store user data in localStorage
     const newUser = {
       name: signupName,
       email: signupEmail,
@@ -67,13 +63,11 @@ const Auth = () => {
     };
     localStorage.setItem("user", JSON.stringify(newUser));
 
-    // Reset signup form fields
     setSignupName("");
     setSignupEmail("");
     setSignupPassword("");
     setShowSignupPassword(false);
 
-    // Redirect to Todo page
     navigate("/todo");
   };
 

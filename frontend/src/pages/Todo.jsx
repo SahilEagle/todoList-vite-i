@@ -16,7 +16,7 @@ const Todo = () => {
     const isAuthenticated = () => {
       // Replace with your authentication logic
       const user = localStorage.getItem("user");
-      return !!user; // Example: Check if user data exists in localStorage
+      return !!user;
     };
 
     // If not authenticated, redirect to /auth
@@ -62,7 +62,6 @@ const Todo = () => {
     // Clear localStorage
     localStorage.removeItem('user');
 
-    // Redirect to /auth page
     navigate('/auth');
   };
 
