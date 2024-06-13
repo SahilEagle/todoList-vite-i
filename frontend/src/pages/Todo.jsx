@@ -1,10 +1,38 @@
-import React, { useState } from "react";
-import "./todo.css"
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./todo.css";
 
 const Todo = () => {
   const [tasks, setTasks] = useState([]);
   const [currentTask, setCurrentTask] = useState(null);
   const [showModal, setShowModal] = useState(false);
+
+  const [userName, setUserName] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Function to check if user is authenticated
+    const isAuthenticated = () => {
+      // Replace with your authentication logic
+      const user = localStorage.getItem("user");
+      return !!user; // Example: Check if user data exists in localStorage
+    };
+
+    // If not authenticated, redirect to /auth
+    if (!isAuthenticated()) {
+      navigate("/auth");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    // Fetch user data from localStorage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUserName(parsedUser.name); // Set user's name to state
+    }
+  }, []);
 
   const handleAddTask = (e) => {
     e.preventDefault();
@@ -16,20 +44,43 @@ const Todo = () => {
 
   const handleEditTask = (e) => {
     e.preventDefault();
-    const title = e.target['edit-title'].value;
-    const description = e.target['edit-description'].value;
-    setTasks(tasks.map(task => task === currentTask ? { title, description } : task));
+    const title = e.target["edit-title"].value;
+    const description = e.target["edit-description"].value;
+    setTasks(
+      tasks.map((task) =>
+        task === currentTask ? { title, description } : task
+      )
+    );
     setShowModal(false);
   };
 
   const handleDeleteTask = (taskToDelete) => {
-    setTasks(tasks.filter(task => task !== taskToDelete));
+    setTasks(tasks.filter((task) => task !== taskToDelete));
+  };
+
+  const handleLogout = () => {
+    // Clear localStorage
+    localStorage.removeItem('user');
+
+    // Redirect to /auth page
+    navigate('/auth');
   };
 
   return (
     <div>
       <div className="headline">
-        <h1 id="head-date">Date</h1>
+        <h1 id="head-date">Welcome {userName}</h1>
+      </div>
+
+      {/* Logout Button */}
+      <div className="fixed-bottom-end p-3">
+        <button
+          className="btn btn-danger"
+          onClick={handleLogout}
+          style={{ position: "fixed", bottom: "20px", right: "20px" }}
+        >
+          Logout
+        </button>
       </div>
 
       <div className="InputBox">
@@ -41,7 +92,11 @@ const Todo = () => {
             <label htmlFor="title">Title</label>
           </div>
           <div className="form-floating mb-3">
-            <textarea className="form-control" id="description" required></textarea>
+            <textarea
+              className="form-control"
+              id="description"
+              required
+            ></textarea>
             <label htmlFor="description">Description</label>
           </div>
           <div className="text-center">
@@ -64,7 +119,10 @@ const Todo = () => {
               <p>{task.description}</p>
               <button
                 className="btn btn-sm btn-secondary me-2 mt-2"
-                onClick={() => { setCurrentTask(task); setShowModal(true); }}
+                onClick={() => {
+                  setCurrentTask(task);
+                  setShowModal(true);
+                }}
               >
                 Edit
               </button>
@@ -85,11 +143,16 @@ const Todo = () => {
       </div>
 
       {showModal && (
-        <div className="modal fade show custom-modal-backdrop" style={{ display: "block" }}>
+        <div
+          className="modal fade show custom-modal-backdrop"
+          style={{ display: "block" }}
+        >
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="editModalLabel">Edit Task</h5>
+                <h5 className="modal-title" id="editModalLabel">
+                  Edit Task
+                </h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -100,7 +163,9 @@ const Todo = () => {
               <div className="modal-body">
                 <form onSubmit={handleEditTask}>
                   <div className="mb-3">
-                    <label htmlFor="edit-title" className="form-label">Title</label>
+                    <label htmlFor="edit-title" className="form-label">
+                      Title
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -110,7 +175,9 @@ const Todo = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="edit-description" className="form-label">Description</label>
+                    <label htmlFor="edit-description" className="form-label">
+                      Description
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -119,7 +186,9 @@ const Todo = () => {
                       required
                     />
                   </div>
-                  <button type="submit" className="btn btn-primary">Save changes</button>
+                  <button type="submit" className="btn btn-primary">
+                    Save changes
+                  </button>
                 </form>
               </div>
             </div>
