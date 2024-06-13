@@ -12,9 +12,7 @@ const Todo = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Function to check if user is authenticated
     const isAuthenticated = () => {
-      // Replace with your authentication logic
       const user = localStorage.getItem("user");
       return !!user;
     };
