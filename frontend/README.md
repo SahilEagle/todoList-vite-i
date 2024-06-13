@@ -42,16 +42,18 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 2. Install dependencies
 
-```bash
-npm install
-# or
-yarn install
+  ```bash
+  npm install
+  # or
+  yarn install
+```
 
 ### Running the Application
 
-1. Start the development server:
+3. Start the development server:
 
    ```bash
    npm start
    # or
    yarn start
+   ```
